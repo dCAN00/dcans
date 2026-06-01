@@ -1,0 +1,63 @@
+<!-- SAYACIN GÖRÜNECEĞİ YER (HTML) -->
+<div class="gerisayim-konteyner">
+    <h2>MANİTAMLA 3.AYIMIZA SONN..</h2>
+    <div id="gerisayim">
+        <span id="kalan-gun">0</span> Gün 
+        <span id="kalan-saat">0</span> Saat 
+        <span id="kalan-dakika">0</span> Dakika 
+        <span id="kalan-saniye">0</span> Saniye
+    </div>
+</div>
+
+<!-- SAYACIN TARZI (CSS) -->
+<style>
+.gerisayim-konteyner {
+    text-align: center;
+    padding: 25px;
+    background: #e9c9f1;
+    border: 2px dashed #ff7675;
+    border-radius: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    font-family: 'Poppins', sans-serif;
+}
+.gerisayim-konteyner h2 {
+    color: #d63031;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+#gerisayim {
+    font-size: 1.3rem;
+    color: #2d3436;
+}
+#gerisayim span {
+    color: #e84393;
+    font-size: 2rem;
+    font-weight: bold;
+}
+</style>
+
+<!-- SAYACIN MOTORU (JAVASCRIPT) -->
+<script>
+const hedefTarih = new Date("July 1, 2026 00:00:00").getTime();
+
+const geriSayimMotoru = setInterval(function() {
+    const simdi = new Date().getTime();
+    const fark = hedefTarih - simdi;
+
+    const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+    const saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+    const saniye = Math.floor((fark % (1000 * 60)) / 1000);
+
+    document.getElementById("kalan-gun").innerText = gun;
+    document.getElementById("kalan-saat").innerText = saat;
+    document.getElementById("kalan-dakika").innerText = dakika;
+    document.getElementById("kalan-saniye").innerText = saniye;
+
+    if (fark < 0) {
+        clearInterval(geriSayimMotoru);
+        document.getElementById("gerisayim").innerHTML = "O Büyük Gün Geldi! ❤️";
+    }
+}, 1000);
+</script>
